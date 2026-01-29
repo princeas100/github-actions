@@ -16,6 +16,17 @@ jobs:
         php-version: ['8.4']    
     
     steps:
+      - name: Test Secret Access
+        run: |
+          echo "Secret length: ${#MY_SECRET}"
+          if [ -n "$MY_SECRET" ]; then
+            echo "✅ Secret is available!"
+          else
+            echo "❌ Secret not found"
+          fi
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET_KEY }}
+
       - name: Checkout code
         uses: actions/checkout@v4
       
